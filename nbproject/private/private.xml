@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/Panels/Results.java</file>
-            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/numberrandomgame/AudioManager.java</file>
-            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/Panels/Home.java</file>
-            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/numberrandomgame/Configuration.java</file>
-            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/Panels/Login.java</file>
             <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/Panels/Game.java</file>
+            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/Panels/Home.java</file>
+            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/Panels/Instructive.java</file>
+            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/Panels/Results.java</file>
+            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/Panels/Settings.java</file>
+            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/numberrandomgame/AudioManager.java</file>
+            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/numberrandomgame/Background.java</file>
+            <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/numberrandomgame/Configuration.java</file>
             <file>file:/C:/Users/funer/OneDrive/Documents/NetBeansProjects/NumberRandomGame/src/numberrandomgame/Drive.java</file>
         </group>
     </open-files>

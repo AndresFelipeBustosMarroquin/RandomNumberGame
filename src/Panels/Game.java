@@ -1,5 +1,6 @@
 package Panels;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
@@ -72,17 +73,19 @@ public class Game extends javax.swing.JFrame {
         ((javax.swing.text.PlainDocument) UserText.getDocument()).setDocumentFilter(new javax.swing.text.DocumentFilter() {
     @Override
     public void insertString(DocumentFilter.FilterBypass fb,int off,String str,javax.swing.text.AttributeSet a)throws javax.swing.text.BadLocationException{
-        if(str.matches("\\d*")) { // acepta vacío o dígitos
+        if(str.matches("\\d*")) {
             super.insertString(fb,off,str,a);
         }
     }
     @Override
     public void replace(DocumentFilter.FilterBypass fb,int off,int len,String str,javax.swing.text.AttributeSet a)throws javax.swing.text.BadLocationException{
-        if(str.matches("\\d*")) { // acepta vacío o dígitos
+        if(str.matches("\\d*")) { 
             super.replace(fb,off,len,str,a);
         }
     }
 }); 
+        randomNumber(Configuration.increment);
+        Number.setText(numberSystem);
         TimerText.setText("Tiempo: " + String.valueOf(timeForQuestion));
         timer(
             () -> {
@@ -96,9 +99,7 @@ public class Game extends javax.swing.JFrame {
                 Configuration.timeForQuestion
         );
         
-        TimerText.setText("Tiempo: " + String.valueOf(timeForQuestion));
-        randomNumber(Configuration.increment);
-        Number.setText(numberSystem);
+        
         javax.swing.SwingUtilities.invokeLater(() -> {
             UserText.requestFocusInWindow();
             UserText.selectAll();
@@ -114,6 +115,7 @@ public class Game extends javax.swing.JFrame {
         Game = new javax.swing.JPanel();
         ExitButton = new javax.swing.JButton();
         Parameters = new javax.swing.JPanel();
+        NextButtonVerify = new javax.swing.JButton();
         True = new javax.swing.JLabel();
         False = new javax.swing.JLabel();
         ValiderFrame = new javax.swing.JLabel();
@@ -163,6 +165,25 @@ public class Game extends javax.swing.JFrame {
         Parameters.setOpaque(false);
         Parameters.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        NextButtonVerify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/AcceptButton.png"))); // NOI18N
+        NextButtonVerify.setBorder(null);
+        NextButtonVerify.setContentAreaFilled(false);
+        NextButtonVerify.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/AcceptButtonGray.png"))); // NOI18N
+        NextButtonVerify.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/AcceptButtonGray.png"))); // NOI18N
+        NextButtonVerify.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NextButtonVerifyMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                NextButtonVerifyMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                NextButtonVerifyMouseReleased(evt);
+            }
+        });
+        NextButtonVerify.addActionListener(this::NextButtonVerifyActionPerformed);
+        Parameters.add(NextButtonVerify, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 410, 320, 130));
+
         True.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/TrueGray.png"))); // NOI18N
         Parameters.add(True, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 350, -1, -1));
 
@@ -170,6 +191,11 @@ public class Game extends javax.swing.JFrame {
         Parameters.add(False, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 340, -1, -1));
 
         ValiderFrame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FrameSimple.png"))); // NOI18N
+        ValiderFrame.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ValiderFrameMousePressed(evt);
+            }
+        });
         Parameters.add(ValiderFrame, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 110, -1, 560));
 
         TimerText.setBackground(new java.awt.Color(255, 255, 255));
@@ -290,6 +316,7 @@ public class Game extends javax.swing.JFrame {
     private void UserTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserTextActionPerformed
         EnterNumberPanel.setVisible(false);
         AcceptButtonUser.setVisible(false);
+        NextButtonVerify.setVisible(true);
         enterNumber();
     }//GEN-LAST:event_UserTextActionPerformed
 
@@ -325,9 +352,35 @@ public class Game extends javax.swing.JFrame {
     private void AcceptButtonUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptButtonUserActionPerformed
         EnterNumberPanel.setVisible(false);
         AcceptButtonUser.setVisible(false); 
+        NextButtonVerify.setVisible(true);
         enterNumber();
         
     }//GEN-LAST:event_AcceptButtonUserActionPerformed
+
+    private void NextButtonVerifyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextButtonVerifyMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NextButtonVerifyMouseClicked
+
+    private void NextButtonVerifyMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextButtonVerifyMousePressed
+        NextButtonVerify.setLocation(NextButtonVerify.getX(), NextButtonVerify.getY() + 2);
+    }//GEN-LAST:event_NextButtonVerifyMousePressed
+
+    private void NextButtonVerifyMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextButtonVerifyMouseReleased
+       NextButtonVerify.setLocation(NextButtonVerify.getX(), NextButtonVerify.getY() - 2);
+    }//GEN-LAST:event_NextButtonVerifyMouseReleased
+
+    private void NextButtonVerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextButtonVerifyActionPerformed
+                Number.setText("? - ? - ?");
+                TimerText.setText("Tiempo: ??");
+                EnterNumberPanel.setVisible(true);
+                NextButtonVerify.setVisible(false);
+                AcceptButtonUser.setVisible(true);
+                contador.stop();
+    }//GEN-LAST:event_NextButtonVerifyActionPerformed
+
+    private void ValiderFrameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ValiderFrameMousePressed
+
+    }//GEN-LAST:event_ValiderFrameMousePressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new Game().setVisible(true));
@@ -349,6 +402,7 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JLabel LevelFrame;
     private javax.swing.JLabel LevelNumberFrame;
     private javax.swing.JLabel LevelText;
+    private javax.swing.JButton NextButtonVerify;
     private javax.swing.JLabel Number;
     private javax.swing.JPanel NumberPanel;
     private javax.swing.JPanel Parameters;
@@ -360,164 +414,186 @@ public class Game extends javax.swing.JFrame {
     private javax.swing.JTextField UserText;
     private javax.swing.JLabel ValiderFrame;
     // End of variables declaration//GEN-END:variables
-    private void timerTotal(){
+    private void timerTotal() {
+    timerGame.stop();
 
-    timerGame.stop(); 
-
-    for (var listener : timerGame.getActionListeners()) {
-        timerGame.removeActionListener(listener);
+    for (var l : timerGame.getActionListeners()) {
+        timerGame.removeActionListener(l);
     }
 
-    timerGame.addActionListener(e -> {
-        timeGame++;
-    });
-
+    timerGame.addActionListener(e -> timeGame++);
     timerGame.start();
 }
-    
-    private void configureScroll(){
-        ScrollNumber.setBorder(null);
-        ScrollNumber.setViewportBorder(null);
-        ScrollNumber.getViewport().setOpaque(false);
-        ScrollNumber.getHorizontalScrollBar().setUI(new javax.swing.plaf.basic.BasicScrollBarUI() {
 
-            @Override
-            protected void configureScrollBarColors() {
-                this.thumbColor = new Color(255, 120, 0);
-                this.trackColor = new Color(0, 0, 0, 180);
-            }
+private void configureScroll() {
+    ScrollNumber.setBorder(null);
+    ScrollNumber.setViewportBorder(null);
+    ScrollNumber.getViewport().setOpaque(false);
 
-            @Override
-            protected JButton createDecreaseButton(int orientation) {
-                return createZeroButton();
-            }
+    ScrollNumber.getHorizontalScrollBar().setUI(new javax.swing.plaf.basic.BasicScrollBarUI() {
 
-            @Override
-            protected JButton createIncreaseButton(int orientation) {
-                return createZeroButton();
-            }
+        @Override
+        protected void configureScrollBarColors() {
+            thumbColor = new Color(255, 120, 0);
+            trackColor = new Color(0, 0, 0, 180);
+        }
 
-            private JButton createZeroButton() {
-                JButton button = new JButton();
-                button.setPreferredSize(new Dimension(0, 0));
-                return button;
-            }
-        });
-    }
+        @Override
+        protected JButton createDecreaseButton(int orientation) {
+            return createZeroButton();
+        }
 
-    private void configureWindow() {
+        @Override
+        protected JButton createIncreaseButton(int orientation) {
+            return createZeroButton();
+        }
+
+        private JButton createZeroButton() {
+            JButton btn = new JButton();
+            btn.setPreferredSize(new Dimension(0, 0));
+            return btn;
+        }
+    });
+}
+
+private void configureWindow() {
     setUndecorated(true);
     initComponents();
     setExtendedState(JFrame.MAXIMIZED_BOTH);
-    bg.setLayout(new java.awt.BorderLayout());
+
+    bg.setLayout(new BorderLayout());
     bg.add(Game);
+
     setContentPane(bg);
 }
-    private void timer(Runnable everyIteration, Runnable finish, int duration){
-        contador.stop(); 
-        timeForQuestion = duration;
-        for (var listener : contador.getActionListeners()) {
-            contador.removeActionListener(listener);
-        }
-        contador.start();
-        contador.addActionListener(e -> {
-        everyIteration.run();
+
+private void timer(Runnable everyIteration, Runnable finish, int duration) {
+    contador.stop();
+    timeForQuestion = duration;
+
+    for (var l : contador.getActionListeners()) {
+        contador.removeActionListener(l);
+    }
+    everyIteration.run();
+
+    contador.addActionListener(e -> {
         timeForQuestion--;
+        everyIteration.run();
 
         if (timeForQuestion < 0) {
             finish.run();
             contador.stop();
-    }
-});
-        
-        
-    }
-    private void enterNumber(){
-    if (UserText.getText().equals(numberSystem)) {
+        }
+    });
+
+    contador.start();
+}
+
+private void enterNumber() {
+
+    boolean correct = UserText.getText().equals(numberSystem);
+
+    if (correct) {
         True.setIcon(iconTrue);
         True.setVisible(true);
+
         levelChangue();
         randomNumber(Configuration.increment);
         Number.setText(numberSystem);
+
         timer(
-            () -> {
-                TimerText.setText("Tiempo: " + String.valueOf(timeForQuestion));
-            },
+            () -> TimerText.setText("Tiempo: " + timeForQuestion),
             () -> {
                 Number.setText("? - ? - ?");
                 TimerText.setText("Tiempo: ??");
                 EnterNumberPanel.setVisible(true);
                 AcceptButtonUser.setVisible(true);
                 True.setIcon(iconTrueGray);
-                javax.swing.SwingUtilities.invokeLater(() -> {
-            UserText.requestFocusInWindow();
-            UserText.selectAll();
-        });
+                focusInput();
             },
             Configuration.timeForQuestion
         );
-        
-        UserText.requestFocusInWindow();
+
         UserText.setText("");
-        
+        focusInput();
+
     } else {
+
         False.setIcon(iconFalse);
         False.setVisible(true);
-        
-        fails +=1;
-        if (fails == Configuration.heart){
-            Drive.timeTotal = timeGame;
-            Drive.level = level;
-            new Results().setVisible(true);
-        } 
+
+        fails++;
+
+        if (fails == Configuration.heart) {
+            endGame();
+            return;
+        }
+
         Number.setText(numberSystem);
+
         switch (heart) {
-        case 5 -> Heart1.setIcon(heartGray);
-        case 4 -> Heart2.setIcon(heartGray);
-        case 3 -> Heart3.setIcon(heartGray);
-        case 2 -> Heart4.setIcon(heartGray);
-        default -> {
-            Drive.timeTotal = timeGame;
-            Drive.level = level;
-            new Results().setVisible(true);
+            case 5 -> Heart1.setIcon(heartGray);
+            case 4 -> Heart2.setIcon(heartGray);
+            case 3 -> Heart3.setIcon(heartGray);
+            case 2 -> Heart4.setIcon(heartGray);
+            default -> {
+                endGame();
+                return;
+            }
         }
-        
-        }
-        heart -= 1;
-        timer(() -> {}, () -> { Number.setText("? - ? - ?"); False.setIcon(iconFalseGray); }, Configuration.timeForQuestion);
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            UserText.requestFocusInWindow();
-        });
-        EnterNumberPanel.setVisible(false);
-        AcceptButtonUser.setVisible(false); 
+
+        heart--;
+
         timer(
+            () -> {},
             () -> {
-                TimerText.setText("Tiempo: " + String.valueOf(timeForQuestion));
+                Number.setText("? - ? - ?");
+                False.setIcon(iconFalseGray);
             },
+            Configuration.timeForQuestion
+        );
+
+        EnterNumberPanel.setVisible(false);
+        AcceptButtonUser.setVisible(false);
+
+        timer(
+            () -> TimerText.setText("Tiempo: " + timeForQuestion),
             () -> {
                 Number.setText("? - ? - ?");
                 TimerText.setText("Tiempo: ??");
                 EnterNumberPanel.setVisible(true);
                 AcceptButtonUser.setVisible(true);
-                UserText.requestFocusInWindow();
                 False.setIcon(iconFalseGray);
-                False.setVisible(true);
+                focusInput();
             },
-                Configuration.timeForQuestion
+            Configuration.timeForQuestion
         );
-        
-        
+
+        focusInput();
     }
 }
-    private void randomNumber(int cantidad){
-            for (int i = 0; i < cantidad; i++) {
-                numberSystem += String.valueOf((int)(Math.random() * 10));
-            }
-        }
-    
-    private void levelChangue(){
-        level ++;
-        LevelText.setText("Nivel:  " + level);
+
+private void focusInput() {
+    javax.swing.SwingUtilities.invokeLater(() -> {
+        UserText.requestFocusInWindow();
+        UserText.selectAll();
+    });
+}
+
+private void endGame() {
+    Drive.timeTotal = timeGame;
+    Drive.level = level;
+    new Results().setVisible(true);
+}
+
+private void randomNumber(int cantidad) {
+    for (int i = 0; i < cantidad; i++) {
+        numberSystem += (int) (Math.random() * 10);
     }
-    
+}
+
+private void levelChangue() {
+    level++;
+    LevelText.setText("Nivel: " + level);
+}
 }
